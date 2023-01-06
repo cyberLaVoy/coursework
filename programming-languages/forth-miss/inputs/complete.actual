@@ -1,0 +1,177 @@
+Gforth 0.7.3, Copyright (C) 1995-2008 Free Software Foundation, Inc.
+Gforth comes with ABSOLUTELY NO WARRANTY; for details type `license'
+Type `bye' to exit
+main 
+candidates:
+[ near 3 3 ]
+fresh   [  far 3 2 ]
+fresh   [  far 3 1 ]
+fresh   [  far 2 2 ]
+invalid [  far 2 3 ]
+invalid [  far 1 3 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[  far 2 2 ]
+invalid [ near 2 3 ]
+invalid [ near 2 4 ]
+repeat  [ near 3 3 ]
+fresh   [ near 3 2 ]
+invalid [ near 4 2 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 3 2 ]
+repeat  [  far 3 1 ]
+fresh   [  far 3 0 ]
+invalid [  far 2 1 ]
+repeat  [  far 2 2 ]
+invalid [  far 1 2 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[  far 3 0 ]
+fresh   [ near 3 1 ]
+repeat  [ near 3 2 ]
+invalid [ near 4 1 ]
+invalid [ near 4 0 ]
+invalid [ near 5 0 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 3 1 ]
+repeat  [  far 3 0 ]
+invalid [  far 3 -1 ]
+invalid [  far 2 0 ]
+invalid [  far 2 1 ]
+fresh   [  far 1 1 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[  far 1 1 ]
+invalid [ near 1 2 ]
+invalid [ near 1 3 ]
+fresh   [ near 2 2 ]
+invalid [ near 2 1 ]
+repeat  [ near 3 1 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 2 2 ]
+invalid [  far 2 1 ]
+invalid [  far 2 0 ]
+repeat  [  far 1 1 ]
+invalid [  far 1 2 ]
+fresh   [  far 0 2 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[  far 0 2 ]
+fresh   [ near 0 3 ]
+invalid [ near 0 4 ]
+invalid [ near 1 3 ]
+invalid [ near 1 2 ]
+repeat  [ near 2 2 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 0 3 ]
+repeat  [  far 0 2 ]
+fresh   [  far 0 1 ]
+invalid [  far -1 2 ]
+invalid [  far -1 3 ]
+invalid [  far -2 3 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[  far 0 1 ]
+fresh   [ near 0 2 ]
+repeat  [ near 0 3 ]
+invalid [ near 1 2 ]
+fresh   [ near 1 1 ]
+invalid [ near 2 1 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 0 2 ]
+[ near 1 1 ]
+invalid [  far 1 0 ]
+invalid [  far 1 -1 ]
+fresh   [  far 0 0 ]
+repeat  [  far 0 1 ]
+invalid [  far -1 1 ]
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 0 2 ]
+[  far 0 0 ]
+
+solution found
+--------------
+[ near 3 3 ]
+[  far 2 2 ]
+[ near 3 2 ]
+[  far 3 0 ]
+[ near 3 1 ]
+[  far 1 1 ]
+[ near 2 2 ]
+[  far 0 2 ]
+[ near 0 3 ]
+[  far 0 1 ]
+[ near 1 1 ]
+[  far 0 0 ]
+backtracking
+backtracking
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+[ near 0 2 ]
+repeat  [  far 0 1 ]
+repeat  [  far 0 0 ]
+invalid [  far -1 1 ]
+invalid [  far -1 2 ]
+invalid [  far -2 2 ]
+backtracking
+backtracking
+backtracking
+backtracking
+backtracking
+backtracking
+backtracking
+backtracking
+backtracking
+backtracking
+
+candidates:
+[  far 3 2 ]
+[  far 3 1 ]
+repeat  [ near 3 2 ]
+repeat  [ near 3 3 ]
+invalid [ near 4 2 ]
+invalid [ near 4 1 ]
+invalid [ near 5 1 ]
+backtracking
+
+candidates:
+[  far 3 2 ]
+repeat  [ near 3 3 ]
+invalid [ near 3 4 ]
+invalid [ near 4 3 ]
+invalid [ near 4 2 ]
+invalid [ near 5 2 ]
+backtracking
+backtracking
+ ok
+bye 

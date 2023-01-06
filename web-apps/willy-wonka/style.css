@@ -1,0 +1,66 @@
+body {
+    background-image: url(images/chocolate-background.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0px;
+}
+h2 {
+    margin-top: 0px;
+}
+input {
+    display: block;
+    margin-bottom: 5px;
+    width: 75%;
+    font-size: 1.2rem;
+}
+
+.golden-ticket {
+    font-size: 1.7rem;
+    font-weight: normal;
+    font-style: italic;
+    color: #FFD700;
+}
+.container {
+    margin: 0 auto;
+    width: 70%;
+    background-color: #6f2c8d;
+    border: 3px solid #006400;
+    padding: 25px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #fff;
+}
+.clear {
+	clear: both;
+}
+.one-half {
+    width: calc(100%/2);
+    float: left;
+}
+
+#ticket-submission-button {
+    display: block;
+    padding: 3px;
+    margin-top: 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: #006400;
+    color: #fff;
+    border: none;
+}
+#ticket-list {
+    max-height: 250px;
+    overflow: scroll;
+}
+
+#page-title {
+    font-size: 2.5rem;
+    color: #FFD700;
+    font-style: italic;
+}
+#wrapper {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    background-color:rgba(0, 0, 0, 0.5);
+}

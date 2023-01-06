@@ -1,0 +1,29 @@
+body {
+    background-color:#FFFFFF;
+    color:#666666;
+}
+
+header {
+    background-color:#BA1C21;
+    color:#FFFFFF
+}
+
+nav {
+    background-color:#F3F3F3;
+}
+
+h2 {
+    color:#424242;
+}
+
+h1 {
+    margin-bottom: 0px;
+}
+
+dt {
+    color:#BA1C21;
+}
+
+.dsu {
+    color:#BA1C21;
+}

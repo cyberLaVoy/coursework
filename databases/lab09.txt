@@ -1,0 +1,119 @@
+mysql> source lab09.sql;
+Database changed
+--------------
+SELECT spj.jid
+FROM spj
+JOIN s ON s.sid=spj.sid
+WHERE s.city = 'London'
+--------------
+
++------+
+| jid  |
++------+
+| J1   |
+| J4   |
+| J3   |
+| J7   |
++------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT jid
+FROM spj
+WHERE sid IN (SELECT sid
+		FROM s
+		WHERE city = 'London')
+--------------
+
++------+
+| jid  |
++------+
+| J1   |
+| J4   |
+| J3   |
+| J7   |
++------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT DISTINCT spj.jid
+FROM spj
+JOIN p ON p.pid=spj.pid
+WHERE p.color = 'red'
+--------------
+
++------+
+| jid  |
++------+
+| J1   |
+| J4   |
+| J2   |
+| J3   |
+| J7   |
++------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT DISTINCT jid
+FROM spj
+WHERE pid IN (SELECT pid
+		FROM p
+		WHERE color = 'red')
+--------------
+
++------+
+| jid  |
++------+
+| J1   |
+| J4   |
+| J2   |
+| J3   |
+| J7   |
++------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT jid, pid, sid, qty
+FROM spj
+WHERE qty > (SELECT avg(qty)
+		FROM spj)
+--------------
+
++------+------+------+------+
+| jid  | pid  | sid  | qty  |
++------+------+------+------+
+| J4   | P1   | S1   |  700 |
+| J1   | P3   | S2   |  400 |
+| J4   | P3   | S2   |  500 |
+| J5   | P3   | S2   |  600 |
+| J6   | P3   | S2   |  400 |
+| J7   | P3   | S2   |  800 |
+| J2   | P4   | S3   |  500 |
+| J5   | P5   | S5   |  500 |
+| J4   | P4   | S5   |  800 |
+| J4   | P5   | S5   |  400 |
+| J4   | P6   | S5   |  500 |
++------+------+------+------+
+11 rows in set (0.00 sec)
+
+--------------
+SELECT DISTINCT sid
+  FROM spj  AS spj1 
+  WHERE NOT EXISTS
+       (SELECT *
+          FROM p
+         WHERE NOT EXISTS
+               (SELECT *
+                  FROM spj  AS spj2
+                 WHERE (spj1.sid = spj2.sid)
+                   AND (spj2.pid = p.pid)))
+--------------
+
++------+
+| sid  |
++------+
+| S5   |
++------+
+1 row in set (0.00 sec)
+
+mysql> notee;

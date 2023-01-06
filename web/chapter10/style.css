@@ -1,0 +1,287 @@
+header, main, nav, footer, figure, figcaption, aside, section, article { 
+    display:block; 
+}
+
+
+body {
+    background-color:#D2D2D2;
+    background-image: linear-gradient(to bottom, #FFFFFF, #D2D2D2);
+    color:#666666;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color:#BA1C21;
+    background-image: url(dsu.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+    
+    text-align: left;
+    padding: 20px;
+    
+    color:#FFFFFF;
+}
+
+main {
+    padding: 1px 20px 20px 30px;
+    display: block;
+    background-color: #FFFFFF;
+    margin-left: 190px;
+}
+
+table {
+    border: 1px solid #424242;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse:collapse;
+} 
+
+table th, td {
+    padding: 5px;
+    border: 1px solid #424242;
+}
+
+
+td {
+    text-align:center;
+}
+
+tr:nth-of-type(odd) {
+    background-color:#F3F3F3;
+}
+
+nav {
+    font-weight: bold;
+    padding: 20px;
+    float: left;
+    width: 160px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #BA1C21;
+    
+}
+
+a:hover {
+    color: #424242;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
+}
+
+h3 {
+    font-family: Georgia, "Times New Roman", "serif typeface";
+    color: #BA1C21;
+}
+
+h2 {
+    color:#424242;
+    font-family: Georgia, "Times New Roman", "serif typeface";
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+h1 {
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-family: Georgia, "Times New Roman", "serif typeface";
+}
+
+dt {
+    color:#BA1C21;
+}
+
+main ul {
+    list-style-image: url(marker.gif)
+}
+
+footer {
+    font-size: 75%;
+    font-style:italic;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", "serif typeface";
+    padding: 20px;
+    margin-left: 190px;
+    background-color: #FFFFFF;
+}
+
+label {
+    float: left;
+    display: block;
+    text-align: right;
+    width: 120px;
+    padding: 7px;
+}
+
+input, textarea {
+    display: block;
+    margin-bottom: 20px;
+}
+
+input[type="submit"] {
+    margin-left: 130px;
+}
+
+.dsu {
+    color:#BA1C21;
+    font-weight: bold;
+}
+
+.text {
+    text-align: left;
+}
+
+#contact {
+    font-size: 90%;
+}
+
+#wrapper {
+    margin: 0 auto;
+    width: 80%;
+    max-width: 2048px;
+    min-width: 960px;
+    background-color: #F3F3F3;
+    box-shadow: 0px 2px 10px #333333;
+    
+}
+
+#stadiumhero {
+    height: 300px;
+    background-image: url(stadiumhero.jpg);
+    background-size:cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 190px;
+}
+
+#studenthero {
+    height: 300px;
+    background-image: url(studenthero.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 190px;
+}
+
+#facultyhero {
+    height: 300px;
+    background-image: url(facultyhero.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-left: 190px;
+}
+
+#mobile {
+    display: none;
+}
+
+#desktop {
+    display: inline;
+}
+
+
+@media only screen and (max-width:64em) {
+    body {
+        margin: 0;
+        background-color: #FFFFFF;  
+    }
+    #wrapper {
+        min-width: 0;
+        width: auto;
+        box-shadow: none;
+    }
+    main{
+        margin-left: 0;
+    }
+    nav {
+        float: none;
+        width: auto;
+        text-align: center;
+        padding: 0.5em;
+    }
+    nav li {
+        display: inline;
+        padding: .25em .75em;
+    }
+    #stadiumhero {
+        margin-left: 0;
+        height: 200px;
+    }
+    #studenthero {
+        margin-left: 0;
+        height: 200px;
+    }#facultyhero {
+        margin-left: 0;
+        height: 200px;
+    }
+    footer {
+        margin-left: 0;
+    }
+}
+
+@media only screen and (max-width:37.5em) {
+    header {
+        padding: 1em;
+    }
+    main {
+        padding: .1em 1em;
+        font-size: 90%
+    }
+    h1 {
+        font-size: 1.5em;
+    }
+    nav {
+        padding: 0;
+    }
+    nav li {
+        display: block;
+        margin: 0;
+        border-bottom: 2px solid #330000;
+    }
+    nav a {
+        display: block;
+    }
+    #stadiumhero {
+        background-image: none;
+        height: 0;
+    }
+    #studenthero {
+        background-image: none;
+        height: 0;
+    }
+    #facultyhero {
+        background-image: none;
+        height: 0;
+    }
+    footer {
+        margin-left: 0;
+    }
+    #mobile {
+        display: inline;
+    }
+    #desktop {
+        display: none;
+    }
+    label {
+        float: none; 
+        text-align: left; 
+    } 
+    input[type="submit"] { 
+        margin-left: 0; 
+    }
+    
+}
+
+
+
+
+
+
+
+
+

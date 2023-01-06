@@ -1,0 +1,213 @@
+mysql> source lab08.sql;
+Database changed
+--------------
+SELECT titles.title_id, titles.title_name, publishers.pub_id, publishers.pub_name
+FROM titles
+LEFT JOIN publishers
+ON titles.pub_id=publishers.pub_id
+--------------
+
++----------+-------------------------------------+--------+---------------------+
+| title_id | title_name                          | pub_id | pub_name            |
++----------+-------------------------------------+--------+---------------------+
+| T01      | 1977!                               | P01    | Abatis Publishers   |
+| T06      | How About Never?                    | P01    | Abatis Publishers   |
+| T10      | Not Without My Faberge Egg          | P01    | Abatis Publishers   |
+| T12      | Spontaneous, Not Annoying           | P01    | Abatis Publishers   |
+| T03      | Ask Your System Administrator       | P02    | Core Dump Books     |
+| T02      | 200 Years of German Humor           | P03    | Schadenfreude Press |
+| T07      | I Blame My Mother                   | P03    | Schadenfreude Press |
+| T13      | What Are The Civilian Applications? | P03    | Schadenfreude Press |
+| T04      | But I Did It Unconsciously          | P04    | Tenterhooks Press   |
+| T05      | Exchange of Platitudes              | P04    | Tenterhooks Press   |
+| T08      | Just Wait Until After School        | P04    | Tenterhooks Press   |
+| T09      | Kiss My Boo-Boo                     | P04    | Tenterhooks Press   |
+| T11      | Perhaps It's a Glandular Problem    | P04    | Tenterhooks Press   |
++----------+-------------------------------------+--------+---------------------+
+13 rows in set (0.00 sec)
+
+--------------
+SELECT titles.title_id, titles.title_name, authors.au_lname
+FROM (titles, authors)
+INNER JOIN title_authors
+ON titles.title_id=title_authors.title_id and authors.au_id=title_authors.au_id
+--------------
+
++----------+-------------------------------------+-----------+
+| title_id | title_name                          | au_lname  |
++----------+-------------------------------------+-----------+
+| T01      | 1977!                               | Buchman   |
+| T02      | 200 Years of German Humor           | Buchman   |
+| T03      | Ask Your System Administrator       | Kells     |
+| T04      | But I Did It Unconsciously          | Hull      |
+| T04      | But I Did It Unconsciously          | Hull      |
+| T05      | Exchange of Platitudes              | Hull      |
+| T06      | How About Never?                    | Heydemark |
+| T07      | I Blame My Mother                   | Heydemark |
+| T07      | I Blame My Mother                   | Hull      |
+| T08      | Just Wait Until After School        | Kellsey   |
+| T09      | Kiss My Boo-Boo                     | Kellsey   |
+| T10      | Not Without My Faberge Egg          | Heydemark |
+| T11      | Perhaps It's a Glandular Problem    | Hull      |
+| T11      | Perhaps It's a Glandular Problem    | Hull      |
+| T11      | Perhaps It's a Glandular Problem    | Kellsey   |
+| T12      | Spontaneous, Not Annoying           | Heydemark |
+| T13      | What Are The Civilian Applications? | Buchman   |
++----------+-------------------------------------+-----------+
+17 rows in set (0.00 sec)
+
+--------------
+SELECT titles.title_id, titles.title_name, publishers.pub_id, publishers.pub_name
+FROM titles
+LEFT JOIN publishers
+ON titles.pub_id=publishers.pub_id
+WHERE publishers.state='CA'
+--------------
+
++----------+----------------------------------+--------+-------------------+
+| title_id | title_name                       | pub_id | pub_name          |
++----------+----------------------------------+--------+-------------------+
+| T03      | Ask Your System Administrator    | P02    | Core Dump Books   |
+| T04      | But I Did It Unconsciously       | P04    | Tenterhooks Press |
+| T05      | Exchange of Platitudes           | P04    | Tenterhooks Press |
+| T08      | Just Wait Until After School     | P04    | Tenterhooks Press |
+| T09      | Kiss My Boo-Boo                  | P04    | Tenterhooks Press |
+| T11      | Perhaps It's a Glandular Problem | P04    | Tenterhooks Press |
++----------+----------------------------------+--------+-------------------+
+6 rows in set (0.00 sec)
+
+--------------
+SELECT titles.type, COUNT(titles.type)
+FROM titles
+LEFT JOIN publishers
+ON titles.pub_id=publishers.pub_id
+WHERE publishers.state='CA'
+GROUP BY titles.type
+--------------
+
++------------+--------------------+
+| type       | COUNT(titles.type) |
++------------+--------------------+
+| children   |                  2 |
+| computer   |                  1 |
+| psychology |                  3 |
++------------+--------------------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT COUNT(emp_id) AS '# Employees', SUM(sales) AS 'Total Sales'
+FROM empsales
+--------------
+
++-------------+-------------+
+| # Employees | Total Sales |
++-------------+-------------+
+|          10 |        5900 |
++-------------+-------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT COUNT(empsales.emp_id) AS '# Employees', SUM(sales) AS 'Total Sales'
+FROM empsales
+LEFT JOIN employees
+ON empsales.emp_id=employees.emp_id
+--------------
+
++-------------+-------------+
+| # Employees | Total Sales |
++-------------+-------------+
+|          10 |        5900 |
++-------------+-------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT empsales.emp_id, employees.emp_name, empsales.sales
+FROM employees
+RIGHT JOIN empsales
+ON employees.emp_id=empsales.emp_id
+--------------
+
++--------+-------------------+-------+
+| emp_id | emp_name          | sales |
++--------+-------------------+-------+
+| E01    | Lord Copper       |   600 |
+| E02    | Jocelyn Hitchcock |   800 |
+| E03    | Mr. Salter        |   500 |
+| E04    | William Boot      |   500 |
+| E05    | Mr. Corker        |   700 |
+| E06    | NULL              |   500 |
+| E07    | NULL              |   300 |
+| E08    | NULL              |   400 |
+| E09    | NULL              |   900 |
+| E10    | NULL              |   700 |
++--------+-------------------+-------+
+10 rows in set (0.00 sec)
+
+--------------
+SELECT employees.emp_id, employees.emp_name, empsales.sales
+FROM employees
+LEFT JOIN empsales
+ON employees.emp_id=empsales.emp_id
+--------------
+
++--------+-------------------+-------+
+| emp_id | emp_name          | sales |
++--------+-------------------+-------+
+| E01    | Lord Copper       |   600 |
+| E02    | Jocelyn Hitchcock |   800 |
+| E03    | Mr. Salter        |   500 |
+| E04    | William Boot      |   500 |
+| E05    | Mr. Corker        |   700 |
++--------+-------------------+-------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT empsales.emp_id, employees.emp_name, empsales.sales
+FROM employees
+RIGHT JOIN empsales
+ON employees.emp_id=empsales.emp_id
+--------------
+
++--------+-------------------+-------+
+| emp_id | emp_name          | sales |
++--------+-------------------+-------+
+| E01    | Lord Copper       |   600 |
+| E02    | Jocelyn Hitchcock |   800 |
+| E03    | Mr. Salter        |   500 |
+| E04    | William Boot      |   500 |
+| E05    | Mr. Corker        |   700 |
+| E06    | NULL              |   500 |
+| E07    | NULL              |   300 |
+| E08    | NULL              |   400 |
+| E09    | NULL              |   900 |
+| E10    | NULL              |   700 |
++--------+-------------------+-------+
+10 rows in set (0.00 sec)
+
+--------------
+SELECT hier.emp_id, one.emp_name, hier.boss_id, two.emp_name
+FROM hier
+LEFT JOIN employees one
+ON hier.emp_id = one.emp_id 
+LEFT JOIN employees two
+ON  hier.boss_id = two.emp_id
+--------------
+
++--------+-------------------+---------+-------------------+
+| emp_id | emp_name          | boss_id | emp_name          |
++--------+-------------------+---------+-------------------+
+| E01    | Lord Copper       | NULL    | NULL              |
+| E02    | Jocelyn Hitchcock | E01     | Lord Copper       |
+| E03    | Mr. Salter        | E01     | Lord Copper       |
+| E04    | William Boot      | E02     | Jocelyn Hitchcock |
+| E05    | Mr. Corker        | E02     | Jocelyn Hitchcock |
+| E06    | NULL              | E03     | Mr. Salter        |
+| E07    | NULL              | E04     | William Boot      |
+| E08    | NULL              | E04     | William Boot      |
+| E09    | NULL              | E04     | William Boot      |
+| E10    | NULL              | E06     | NULL              |
+| E11    | NULL              | E06     | NULL              |
++--------+-------------------+---------+-------------------+
+11 rows in set (0.00 sec)
+
+mysql> notee;

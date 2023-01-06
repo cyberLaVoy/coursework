@@ -1,0 +1,84 @@
+sem mutex = 1
+
+sem emptyReaf = 1
+sem readyReaf = 0
+sem readyToEnterReaf = 1
+
+int numInReef, numDiversInReef, numSharksInReef, numWaitingSharks, numWaitingDivers = 0
+
+#SHARKS
+#feed
+    down(readyToEnterReaf)
+    down(mutex)
+    if numSharksInReef == 2:
+        numWaitingSharks++
+        down(readyReaf) # wait if numSharksInReef == 2   
+    if numInReef >= 0 and numSharksInReef == 0:
+        down(emptyReaf) # also releases the mutex on wait
+    numInReef++
+    numSharksInReef++
+    up(mutex)
+    up(readyToEnterReaf)
+
+#feeding
+
+#release
+    down(mutex)
+    numInReef--
+    numSharksInReef--
+    if numSharksInReef == 1 and numWaitingSharks > 0:
+        up(readyReef)
+    if numInReef == 0:
+        up(emptyReef)       
+    up(mutex)
+
+
+if numInReef == 2:
+    # reef is full
+if numInReef == 1:
+    # fit one more of same type
+if numInReef == 0:
+    # either type can enter, but must now block the other type from entering
+
+# once two of the same type have entered the reaf, down reaf entrance
+# once one of anything enters the reaf don't allow one of a different type to enter the reaf
+# up allowing one of anything to enter the reaf once the reaf is empty
+
+
+
+
+
+sem smutex = 1 # protects numSharksInReef
+sem dmutex = 1 # protects numDiversInReef
+sem rmutex = 1
+
+sem thingsFeeding = 2
+
+sem readyToEnterReaf = 1
+
+int numDiversInReef, numSharksInReef = 0
+
+
+#SHARKS
+#feed
+    down(readyToEnterReaf)
+    down(smutex)
+    if numSharksInReef == 0:
+        down(rmutex)
+    numSharksInReef++
+    up(smutex)
+    up(readyToEnterReaf)
+
+    down(thingsFeeding)
+
+#feeding
+
+    up(thingsFeeding)
+
+#release
+    down(smutex)
+    numSharksInReef--
+    if numSharksInReef == 0:
+        up(rmutex)
+    up(smutex)
+    

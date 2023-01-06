@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="robots" content="noindex">
+        <link rel="stylesheet" href="style.css" type="text/css" media="screen" />
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js">
+        </script>
+        <![endif]-->
+        
+        <title>Dixie State University :: Alumni</title>
+    </head>
+    <body>
+        <div id="wrapper">
+            <header><h1>Dixie State University</h1></header>
+            <nav>
+                <ul>
+                    <li>
+                    <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                    <a href="students.html">Students</a>
+                    </li>
+                    <li>
+                    <a href="faculty.html">Faculty</a>
+                    </li>
+                    <li>
+                    <a href="alumni.html">Alumni</a>
+                    </li>
+                </ul>
+            </nav>
+            <main>
+                <h2>
+                    Join Alumni Mailing List
+                </h2>
+                <h3>
+                    Request Alumni Newsletter
+                </h3>
+                
+                <p>
+                    Required fields are marked with an asterisk *
+                </p>
+                
+                <form action="http://cit.dixie.edu/web/1400/mail.php" method="post">
+                    
+                    <label for="myFName">
+                        *First Name: 
+                    </label>
+                    <input type="text" name="myFName" id="myFName" required>
+                    <label for="myLName">
+                        *Last Name: 
+                    </label>
+                    <input type="text" name="myLName" id="myLName" required>
+                    <label for="myEmail">
+                        *E-mail: 
+                    </label>
+                    <input type="email" size="35" name="myEmail" id="myEmail" required>
+                    <label for="myPhone">
+                        Phone: 
+                    </label>
+                    <input type="tel" maxlength="12" name="myPhone" id="myPhone">
+                    <label for="myGraduation">
+                        Graduation Date
+                    </label>
+                    <input type="date" id="myGraduation" name="myGraduation">
+                    <label for=myComments>
+                        *Comments:
+                    </label>
+                    <textarea id="myComments" name="myComments" rows="2" cols="30" required></textarea>
+                    
+                    <input type="submit" value="Submit">
+                    
+                </form>
+                
+                <div id="contact">
+                    <span class="dsu">Dixie State University</span>
+                    <br>
+                    225 S 700 E 
+                    <br>
+                    St George, UT 84770 
+                    <br>
+                    <br>
+                    <a id="mobile" href="tel:435-652-7500">435-652-7500</a>
+                    <span id="desktop">435-652-7500</span>
+                </div>
+            </main>
+            <footer>
+                <br>
+                    Copyright &copy; 2017 Dixie State University
+                <br>
+                    <a href="mailto:d00295458@dixie.edu">Brenten Canfield's DSU Email</a>
+            </footer>
+        </div>
+    </body>
+</html>

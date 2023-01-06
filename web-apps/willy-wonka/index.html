@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Ticket Generator</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="wrapper">
+        <h1 id="page-title" align="center">Willy Wonka's Ticket Generator</h1>
+        <div class="one-half">
+            <div class="container">
+            <h2>Entrant's Details</h2>
+            <div id="ticket-submission-form">
+                <div>Name: </div>
+                <input class="input" type="text" name="entrant_name">
+                <div>Age: </div>
+                <input class="input" type="text" name="entrant_age">
+                <div>Guest's Name: </div>
+                <input class="input" type="text" name="guest_name">
+                <button id="ticket-submission-button">Submit Ticket</button>
+            </div>
+            </div>
+        </div>
+
+        <div class="one-half">
+            <div class="container">
+            <h2>Submitted Tickets</h2>
+            <div id="ticket-list">
+            </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        </div>
+
+        <script src="logic.js"></script>
+    </body>
+</html>

@@ -1,0 +1,149 @@
+mysql> source lab07.sql
+Database changed
+--------------
+SELECT ROUND(AVG(price), 2) AS 'Average Price'
+FROM titles
+--------------
+
++---------------+
+| Average Price |
++---------------+
+|         18.39 |
++---------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT COUNT(title_id) AS 'Qty'
+FROM titles
+--------------
+
++-----+
+| Qty |
++-----+
+|  13 |
++-----+
+1 row in set (0.00 sec)
+
+--------------
+SELECT SUM(sales*price) AS 'Volume'
+FROM titles
+--------------
+
++-------------+
+| Volume      |
++-------------+
+| 41428860.77 |
++-------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT type, ROUND(AVG(pages), 0) AS 'Average Pages'
+FROM titles
+GROUP BY type
+--------------
+
++------------+---------------+
+| type       | Average Pages |
++------------+---------------+
+| biography  |           438 |
+| children   |            54 |
+| computer   |          1226 |
+| history    |           308 |
+| psychology |           512 |
++------------+---------------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT type, ROUND(AVG(pages), 0) AS 'Average Pages'
+FROM titles
+GROUP BY type 
+HAVING AVG(pages) > 500
+--------------
+
++------------+---------------+
+| type       | Average Pages |
++------------+---------------+
+| computer   |          1226 |
+| psychology |           512 |
++------------+---------------+
+2 rows in set (0.00 sec)
+
+--------------
+SELECT type, ROUND(AVG(pages), 0) AS 'Average Pages'
+FROM titles
+GROUP BY type 
+HAVING AVG(pages) > 500
+ORDER BY AVG(pages) ASC
+--------------
+
++------------+---------------+
+| type       | Average Pages |
++------------+---------------+
+| psychology |           512 |
+| computer   |          1226 |
++------------+---------------+
+2 rows in set (0.00 sec)
+
+--------------
+SELECT COUNT(DISTINCT state) AS 'Number of States'
+FROM authors
+--------------
+
++------------------+
+| Number of States |
++------------------+
+|                4 |
++------------------+
+1 row in set (0.00 sec)
+
+--------------
+SELECT state, COUNT(au_id) AS '# of Authors'
+FROM authors
+GROUP BY state
+--------------
+
++-------+--------------+
+| state | # of Authors |
++-------+--------------+
+| CA    |            3 |
+| CO    |            1 |
+| FL    |            1 |
+| NY    |            2 |
++-------+--------------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT type, COUNT(title_id) AS '# of books'
+FROM titles
+GROUP BY type
+HAVING type!='children'
+--------------
+
++------------+------------+
+| type       | # of books |
++------------+------------+
+| biography  |          4 |
+| computer   |          1 |
+| history    |          3 |
+| psychology |          3 |
++------------+------------+
+4 rows in set (0.00 sec)
+
+--------------
+SELECT type, COUNT(title_id) AS '# of books'
+FROM titles
+GROUP BY type
+HAVING COUNT(title_id) >= 3
+ORDER BY type
+--------------
+
++------------+------------+
+| type       | # of books |
++------------+------------+
+| biography  |          4 |
+| history    |          3 |
+| psychology |          3 |
++------------+------------+
+3 rows in set (0.00 sec)
+
+mysql> notee;

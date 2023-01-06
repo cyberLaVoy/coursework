@@ -1,0 +1,249 @@
+<html><head></head><body><h1>CS 3520—Forth Missionaries and Cannibals</h1>
+
+<p>Write a solver for the missionaries and cannibals problem in Forth.
+For review, here is the problem:</p>
+
+<blockquote>
+<p>Suppose there are three missionaries and three cannibals who need to
+cross to the far side of a river using a single boat that can carry
+one or two people at a time. Both groups will cooperate and can
+paddle back and forth freely, but old habits will lead the cannibals
+to eat the missionaries if the missionaries are ever outnumbered on
+either side of the river.</p>
+
+<p>The problem is to find a way to get all of the missionaries and all
+of the cannibals safely across the river.</p>
+</blockquote>
+
+<p>You must write it exactly as specified below.</p>
+
+<h2>General tips</h2>
+
+<p>Carefully test each word you write before moving on. The design
+suggested here makes it straightforward to test most words in
+isolation, but some require a bit more work to test.</p>
+
+<p>If a word does not work, carefully track its use of the stack. Break
+each and every word onto its own line, and document the state of the
+stack after that line. For example, you could rewrite this word:</p>
+
+<pre><code class="language-forth">\ check if a number is a member of the used set
+: isused ( n -- bool )
+    \ loop through all set elements
+    usedcounter @ 0 ?do
+        \ compare n with elt i
+        dup used i cells + @
+        \ return true if its a match
+        = if drop -1 unloop exit then
+    loop
+    \ return false
+    drop 0
+;
+</code></pre>
+
+<p>to be like this:</p>
+
+<pre><code class="language-forth">\ check if a number is a member of the used set
+: isused ( n -- bool )
+    \loop through all set elements
+    usedcounter                         ( n &amp;usedcounter )
+    @                                   ( n usedcounter )
+    0                                   ( n usedcounter 0 )
+    ?do                                 ( n )
+        \ compare n with elt i
+        dup                             ( n n )
+        used                            ( n n &amp;used )
+        i                               ( n n &amp;used i )
+        cells                           ( n n &amp;used i*8 )
+        +                               ( n n &amp;used[i] )
+        @                               ( n n used[i] )
+        \ return true if its a match
+        =                               ( n n==used[i] )
+        if                              ( n )
+            drop                        ( )
+            -1                          ( true )
+            unloop                      ( true )
+            exit                        ( true )
+        then                            ( n )
+    loop                                ( n )
+    \ return false
+    drop                                ( )
+    0                                   ( false )
+;
+</code></pre>
+
+<p>If you are meticulous about documenting how the stack is used, it is
+much easier to catch low-level mistakes. It can make it harder to
+read and follow the higher-level flow of the word, however, so use
+this technique judiciously. For example, you might write a word this
+way, test it, and then convert it into the first version (shown
+above) once you are confident that it is correct.</p>
+
+<h2>Overview</h2>
+
+<p>I suggest representing states in two ways:</p>
+
+<ul>
+<li><p>Store three values on the stack for a single state: <em>near</em>, <em>m</em>, and
+<em>c</em>. <em>near</em> is true if the boat is on the near side of the
+river. <em>m</em> and <em>c</em> are the number of missionaries and cannibals
+on the near side of the river, respectively.</p></li>
+
+<li><p>Store all three values in a single integer. This is the &#34;packed&#34;
+format. While less convenient to work with, this format makes it
+easier to store states in stacks and sets.</p></li>
+</ul>
+
+<p>The overall flow of the program will follow this pseudo-code:</p>
+
+<ul>
+<li>push the start state on the candidate stack</li>
+<li>findsolution:
+
+<ul>
+<li>print the candidate stack</li>
+<li>pop a candidate state off the candidate stack</li>
+<li>push a copy on the bread-crumb trail stack</li>
+<li>if it is the goal state
+
+<ul>
+<li>print out the contents of the bread-crumb trail
+in order. this is the solution to the puzzle.</li>
+</ul></li>
+<li>else
+
+<ul>
+<li>generate a list of successor states (there should be
+exactly 5)</li>
+<li>push the valid, legal, fresh successors on the
+candidate stack</li>
+<li>for each successor generated in this step:
+
+<ul>
+<li>call findsolution recursively</li>
+</ul></li>
+</ul></li>
+<li>pop the state off the bread-crumb trail stack</li>
+</ul></li>
+</ul>
+
+<p>I suggest writing lots of helper words. Avoid complexity in the
+findsolution word, since it will already be the most difficult part to
+test. What follows is one suggested implementation. You are free to
+write it a different way if you would prefer.</p>
+
+<h2>Implementation</h2>
+
+<p>Start by writing some helper words. The first few are described
+adequately by their names and stack-effect comments:</p>
+
+<pre><code class="language-forth">: 3dup ( x y z -- x y z x y z ) ... ;
+: 3drop ( x y z -- ) ... ;
+: pack ( near m c -- packedstate ) ... ;
+: unpack ( packedstate -- near m c ) ... ;
+: printstate ( side m c -- ) ... ;
+</code></pre>
+
+<p>Write each of these and test them thoroughly. To load code from a
+source file, give the name of the source file when loading gforth:</p>
+
+<pre><code>gforth missionaries.fs
+</code></pre>
+
+<p>Next, implement basic stack and set data structures:</p>
+
+<pre><code class="language-forth">\ test if n is in the used set
+: isused ( n -- bool ) ... ;
+
+\ add n to the used set
+: addused ( n -- ) ... ;
+
+
+\ push a value on the candidate stack
+: pushcandidate ( n -- ) ... ;
+
+\ pop a value off the candidate stack
+: popcandidate ( -- n ) ... ;
+
+
+\ push a value on the bread crumb trail stack
+: pushcrumb ( n -- ) ... ;
+
+\ pop a value off the bread crumb trail stack
+: popcrumb ( -- n ) ... ;
+</code></pre>
+
+<p>For debugging, I suggest writing words to print out the entire
+contents of each of these data structures:</p>
+
+<pre><code class="language-forth">\ print the contents of the used set in order
+: printused ( -- ) ... ;
+
+\ print the contents of the candidate stack in order
+: printcandidates ( -- ) ... ;
+
+\ print the contents of the bread crumb trail in order
+: printcrumbs ( -- ) ... ;
+</code></pre>
+
+<p>Next, start the words to work with states:</p>
+
+<pre><code class="language-forth">\ push the starting state onto the stack
+: startstate ( -- near m c ) ... ;
+
+\ test if the state on the stack is the goal state
+: isgoal ( near m c -- bool ) ... ;
+
+\ test if the state on the stack is valid and legal
+: isvalid ( near m c -- bool ) ... ;
+</code></pre>
+
+<p>The next two generate, record, and report on potential next moves
+from a given state:</p>
+
+<pre><code class="language-forth">\ add a state to the candidate stack if it is valid and new
+\ report on the outcome: invalid, repeat, or fresh
+: addcandidate ( near m c -- ) ... ;
+
+\ find all successor candidates for the given state, push them on stack
+\ leaves the number of states added on the stack
+: successors ( near m c -- n )
+</code></pre>
+
+<p><code>addcandidate</code> requires a bit more explanation. It should:</p>
+
+<ul>
+<li>check if the (packed) state is valid (reject it and print a
+message if not)</li>
+<li>check if the (packed) state is already used (reject it and print
+a message if not)</li>
+<li>otherwise:
+
+<ul>
+<li>print a message indicating that it is a fresh state</li>
+<li>add the packed state to the used list</li>
+<li>add the packed state to the candidate stack</li>
+</ul></li>
+</ul>
+
+<p><code>addcandidate</code> is a helper for <code>successors</code>, which generates all (5)
+possible successors for a given state, handing each one to
+<code>addcandidate</code>, which filters some of them out and adds the rest to
+the candidate stack.</p>
+
+<p>Then comes the main search loop:</p>
+
+<pre><code class="language-forth">\ find the solution from position at top of stack
+: findsolution ( -- )
+</code></pre>
+
+<p><code>findsolution</code> assumes that a state is already on the candidate stack, and
+it uses the words already described to implement the pseudo-code
+given earlier. For a word to call itself recursively, it uses the
+special word <code>recurse</code> instead of the normal word name
+(<code>findsolution</code> in this case).</p>
+
+<p>Finally, write a <code>main</code> word that resets the stacks and the used
+set, puts the start state on the candidate stack, adds it to the
+used set, and calls <code>findsolution</code>.</p>
+</body></html>

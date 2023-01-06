@@ -1,0 +1,86 @@
+mysql> source lab10.sql
+Database changed
+--------------
+SELECT city from s
+UNION
+SELECT city from j
+--------------
+
++--------+
+| city   |
++--------+
+| London |
+| Paris  |
+| Athens |
+| Rome   |
+| Oslo   |
++--------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT city from s
+UNION
+SELECT city from p
+UNION
+SELECT city from j
+--------------
+
++--------+
+| city   |
++--------+
+| London |
+| Paris  |
+| Athens |
+| Rome   |
+| Oslo   |
++--------+
+5 rows in set (0.00 sec)
+
+--------------
+SELECT DISTINCT s.city
+FROM s
+INNER JOIN j
+ON s.city = j.city
+--------------
+
++--------+
+| city   |
++--------+
+| Paris  |
+| Athens |
+| London |
++--------+
+3 rows in set (0.00 sec)
+
+--------------
+SELECT DISTINCT s.city
+FROM s
+INNER JOIN (p, j)
+ON s.city = j.city and j.city = p.city and p.city = s.city
+--------------
+
++--------+
+| city   |
++--------+
+| Paris  |
+| London |
++--------+
+2 rows in set (0.00 sec)
+
+--------------
+SELECT city from s
+WHERE city NOT IN (SELECT city from p)
+UNION
+SELECT city from j
+WHERE city NOT IN (SELECT city from p)
+--------------
+
++--------+
+| city   |
++--------+
+| Athens |
+| Oslo   |
++--------+
+2 rows in set (0.00 sec)
+
+mysql> notee;

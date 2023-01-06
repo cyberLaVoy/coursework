@@ -1,0 +1,403 @@
+mysql> source sql_security.sql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+--------------
+DROP TABLE payroll
+--------------
+
+Query OK, 0 rows affected (0.05 sec)
+
+--------------
+CREATE TABLE payroll
+(
+dept SMALLINT,
+manager CHAR(1),
+name VARCHAR(30),
+birth_date DATE,
+salary INT
+)
+--------------
+
+Query OK, 0 rows affected (0.03 sec)
+
+--------------
+INSERT INTO payroll VALUES ('1','Y','BOB','1981/01/01','50000')
+--------------
+
+Query OK, 1 row affected (0.03 sec)
+
+--------------
+INSERT INTO payroll VALUES ('1','N','BILL','1982/02/02','40000')
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO payroll VALUES ('1','N','BOYD','1983/03/03','70000')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO payroll VALUES ('2','Y','JIM','1984/04/04','40000')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO payroll VALUES ('2','N','JANET','1985/05/05','50000')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO payroll VALUES ('2','N','JACK','1986/06/06','60000')
+--------------
+
+Query OK, 1 row affected (0.01 sec)
+
+--------------
+INSERT INTO payroll VALUES ('3','Y','MARY','1987/07/07','50000')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO payroll VALUES ('3','N','MARTHA','1988/08/08','70000')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+INSERT INTO payroll VALUES ('3','N','MARTY','1989/09/09','90000')
+--------------
+
+Query OK, 1 row affected (0.00 sec)
+
+--------------
+DROP USER 'BOB'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'BILL'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.01 sec)
+
+--------------
+DROP USER 'BOYD'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'JIM'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'JANET'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'JACK'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'MARY'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'MARTHA'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'MARTY'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'BOB'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'BILL'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'BOYD'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'JIM'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'JANET'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'JACK'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'MARY'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'MARTHA'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+CREATE USER 'MARTY'@'localhost' IDENTIFIED BY 'password'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date, salary) ON flame_company.payroll TO 'BOB'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date) ON flame_company.payroll TO 'BILL'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date) ON flame_company.payroll TO 'BOYD'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date, salary) ON flame_company.payroll TO 'JIM'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date) ON flame_company.payroll TO 'JANET'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date) ON flame_company.payroll TO 'JACK'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT ALL ON flame_company.payroll TO 'MARY'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date, salary), UPDATE (birth_date) ON flame_company.payroll TO 'MARTHA'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+GRANT SELECT (dept, manager, name, birth_date) ON flame_company.payroll TO 'MARTY'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'BOB'@'localhost'
+--------------
+
++----------------------------------------------------------------------------------------------------------+
+| Grants for BOB@localhost                                                                                 |
++----------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'BOB'@'localhost'                                                                  |
+| GRANT SELECT (manager, dept, salary, name, birth_date) ON `flame_company`.`payroll` TO 'BOB'@'localhost' |
++----------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'BILL'@'localhost'
+--------------
+
++---------------------------------------------------------------------------------------------------+
+| Grants for BILL@localhost                                                                         |
++---------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'BILL'@'localhost'                                                          |
+| GRANT SELECT (manager, dept, birth_date, name) ON `flame_company`.`payroll` TO 'BILL'@'localhost' |
++---------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'BOYD'@'localhost'
+--------------
+
++---------------------------------------------------------------------------------------------------+
+| Grants for BOYD@localhost                                                                         |
++---------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'BOYD'@'localhost'                                                          |
+| GRANT SELECT (manager, dept, birth_date, name) ON `flame_company`.`payroll` TO 'BOYD'@'localhost' |
++---------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'JIM'@'localhost'
+--------------
+
++----------------------------------------------------------------------------------------------------------+
+| Grants for JIM@localhost                                                                                 |
++----------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'JIM'@'localhost'                                                                  |
+| GRANT SELECT (manager, dept, salary, name, birth_date) ON `flame_company`.`payroll` TO 'JIM'@'localhost' |
++----------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'JANET'@'localhost'
+--------------
+
++----------------------------------------------------------------------------------------------------+
+| Grants for JANET@localhost                                                                         |
++----------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'JANET'@'localhost'                                                          |
+| GRANT SELECT (manager, dept, birth_date, name) ON `flame_company`.`payroll` TO 'JANET'@'localhost' |
++----------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'JACK'@'localhost'
+--------------
+
++---------------------------------------------------------------------------------------------------+
+| Grants for JACK@localhost                                                                         |
++---------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'JACK'@'localhost'                                                          |
+| GRANT SELECT (manager, dept, birth_date, name) ON `flame_company`.`payroll` TO 'JACK'@'localhost' |
++---------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'MARY'@'localhost'
+--------------
+
++-------------------------------------------------------------------------+
+| Grants for MARY@localhost                                               |
++-------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'MARY'@'localhost'                                |
+| GRANT ALL PRIVILEGES ON `flame_company`.`payroll` TO 'MARY'@'localhost' |
++-------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'MARTHA'@'localhost'
+--------------
+
++----------------------------------------------------------------------------------------------------------------------------------+
+| Grants for MARTHA@localhost                                                                                                      |
++----------------------------------------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'MARTHA'@'localhost'                                                                                       |
+| GRANT SELECT (manager, dept, salary, name, birth_date), UPDATE (birth_date) ON `flame_company`.`payroll` TO 'MARTHA'@'localhost' |
++----------------------------------------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+SHOW GRANTS FOR 'MARTY'@'localhost'
+--------------
+
++----------------------------------------------------------------------------------------------------+
+| Grants for MARTY@localhost                                                                         |
++----------------------------------------------------------------------------------------------------+
+| GRANT USAGE ON *.* TO 'MARTY'@'localhost'                                                          |
+| GRANT SELECT (manager, dept, birth_date, name) ON `flame_company`.`payroll` TO 'MARTY'@'localhost' |
++----------------------------------------------------------------------------------------------------+
+2 rows in set (0.00 sec)
+
+--------------
+DROP USER 'BOB'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'BILL'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'BOYD'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'JIM'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'JANET'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'JACK'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'MARY'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'MARTHA'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+--------------
+DROP USER 'MARTY'@'localhost'
+--------------
+
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> notee;

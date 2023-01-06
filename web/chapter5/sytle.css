@@ -1,0 +1,66 @@
+body {
+    background-color:#FFFFFF;
+    color:#666666;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+header {
+    background-color:#BA1C21;
+    background-image: url(dsu.jpg);
+    background-position: right;
+    background-repeat: no-repeat;
+    
+    line-height: 400%;
+    text-indent: 1em;
+    
+    color:#FFFFFF;
+}
+
+nav {
+    background-color:#F3F3F3;
+    font-weight: bold;
+}
+
+nav a {
+    text-decoration: none;
+    
+}
+
+h3 {
+    font-family: Georgia, "Times New Roman", "serif typeface";
+    color: #BA1C21;
+}
+
+h2 {
+    color:#424242;
+    font-family: Georgia, "Times New Roman", "serif typeface";
+}
+
+h1 {
+    margin-bottom: 0px;
+    font-family: Georgia, "Times New Roman", "serif typeface";
+}
+
+dt {
+    color:#BA1C21;
+}
+
+ul {
+    list-style-image: url(marker.gif)
+}
+
+footer {
+    font-size: 75%;
+    font-style:italic;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", "serif typeface";
+}
+
+.dsu {
+    color:#BA1C21;
+    font-weight: bold;
+}
+
+#contact {
+    font-size: 90%;
+}

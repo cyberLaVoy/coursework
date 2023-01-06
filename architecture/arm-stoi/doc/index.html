@@ -1,0 +1,68 @@
+<html><head></head><body><h1>String to integer</h1>
+
+<p>Write a function called <code>stoi</code> to convert a string containing a base
+10 number to an integer value. This is essentially the reverse of
+the <code>itoa</code> function we wrote early in the semester.</p>
+
+<pre><code>stoi(buffer) -&gt; n
+</code></pre>
+
+<p><code>stoi</code> is given the address of a buffer in memory containing a text
+representation of an integer value. Here is the basic algorithm for
+doing this:</p>
+
+<ul>
+<li>start with n = 0</li>
+<li>read a character from the buffer and call it c</li>
+<li>if the value of c is between &#39;0&#39; and &#39;9&#39; (48 and 57):
+
+<ul>
+<li>n = n * 10 + (c - &#39;0&#39;)</li>
+<li>read the next character from the buffer and repeat</li>
+</ul></li>
+<li>else return n</li>
+</ul>
+
+<p>Note that you do not know in advance how many characters make up the
+number. As soon as you read something that is not a digit, you
+should assume you have reached the end of the input.</p>
+
+<p>This reads characters in order, so you do NOT need to reverse
+anything like you did in <code>itoa</code>.</p>
+
+<p>In addition to the outline given above, you should accept an
+optional <code>-</code> (minus sign) at the beginning of the input, and return
+a negative number instead of a positive number.</p>
+
+<p>For example, if <code>stoi</code> is called with 0x1230 as the value of the
+buffer pointer, and memory contains the following:</p>
+
+<ul>
+<li>0x1230: &#39;3&#39; (ASCII code 51)</li>
+<li>0x1231: &#39;8&#39; (ASCII code 56)</li>
+<li>0x1232: &#39;0&#39; (ASCII code 48)</li>
+<li>0x1233: &#39;1&#39; (ASCII code 49)</li>
+<li>0x1234: &#39;2&#39; (ASCII code 50)</li>
+<li>0x1235: &#39; &#39; (ASCII code 32)</li>
+</ul>
+
+<p>Your function should return the number 38012.</p>
+
+<h2>Hints</h2>
+
+<p>Remember that you can load a single byte from memory by appending a
+&#39;b&#39; to a normal load instruction:</p>
+
+<pre><code>ldrb r0, [r1]
+</code></pre>
+
+<p>To multiply a number by 10, you can use a series of shifts and adds.
+Every time a number is shifted left, it is effectively multiplied by
+two. For example, to multiply r0 by 5, you could use:</p>
+
+<pre><code>add r0, r0, r0, lsl #2
+</code></pre>
+
+<p>This adds r0×4 to r0, giving r0×5. You could double this value again
+to get the original value multiplied by 10.</p>
+</body></html>
